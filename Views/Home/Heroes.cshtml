@@ -1,0 +1,51 @@
+﻿@model List<BattleJackGuru2.Models.BJHeroesData.BJHeroesRow>
+@{
+    ViewBag.Title = "Heroes";
+    WebGrid grid1 = new WebGrid(Model, rowsPerPage: 30);
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                
+            </p>
+        </div>
+    </section>
+}
+<div>
+    @using (Html.BeginForm("Heroes", "Home", FormMethod.Post))
+    {
+        <p>Search: <select id="searchCol" name="searchCol">
+                    <option value="Name">Name</option>
+                    <option value="ID">Hero #</option>
+                    <option value="Element">Element</option>
+                    <option value="Type">Type</option>
+                   </select> 
+        @Html.TextBox("searchStr") <input type="submit" value="Search Heroes" /></p>
+    }
+</div>
+
+@grid1.GetHtml(
+tableStyle: "webGrid",
+headerStyle: "wgheader",
+alternatingRowStyle: "alt",
+columns: grid1.Columns(
+grid1.Column(columnName: "Hero_ID", header: "Hero #"),
+grid1.Column(columnName: "hero_name", header: "Name", format: item => @Html.Raw("<div class='tooltip'>" + item.hero_name + Html.Raw("<span class='tooltiptext'><img src='../Images/Heroes/")+item.hero_id+Html.Raw(".png'></span></div>"))),
+grid1.Column(columnName: "h_Element", header: "Element"),
+grid1.Column(columnName: "h_Type", header: "Type 1"),
+grid1.Column(columnName: "h_Type2", header: "Type 2"),
+grid1.Column(columnName: "h_Type3", header: "Type 3"),
+grid1.Column(columnName: "h_Type4", header: "Type 4"),
+grid1.Column(columnName: "Party_Size", header: "Size"),
+grid1.Column(columnName: "L_Skill", header: "Leader Skill"),
+grid1.Column(columnName: "Skill", header: "Skill"),
+grid1.Column(columnName: "c_Skill", header: "Combo Skill"),
+grid1.Column(columnName: "combo_hero", header: "Combos With"),
+grid1.Column(columnName: "location", header: "In Chapters")
+))

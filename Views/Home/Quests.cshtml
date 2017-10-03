@@ -1,0 +1,33 @@
+﻿@model List<BattleJackGuru2.Models.BJHeroesData.BJQuestsRow>
+@{
+    ViewBag.Title = "Quests";
+    WebGrid grid1 = new WebGrid(Model, rowsPerPage: 30);
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+            </hgroup>
+            <p>
+                
+            </p>
+        </div>
+    </section>
+}
+
+@grid1.GetHtml(
+tableStyle: "webGrid",
+headerStyle: "wgheader",
+alternatingRowStyle: "alt",
+columns: grid1.Columns(
+grid1.Column(columnName: "Quest_Name", header: "Name"),
+grid1.Column(columnName: "Quest_Text", header: "Objective"),
+grid1.Column(columnName: "Reward_Gems", header: "Gems"),
+grid1.Column(columnName: "Reward_Gold", header: "Gold"),
+grid1.Column(columnName: "Reward_XP", header: "Experience"),
+grid1.Column(columnName: "Reward_Energy", header: "Energy"),
+grid1.Column(columnName: "Reward_Keys", header: "Grand Keys"),
+grid1.Column(columnName: "RowError", header: "Targets(Locations)", format: item => @Html.Raw(item.RowError))
+))

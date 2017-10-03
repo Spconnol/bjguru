@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "XP Calculator";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+            </hgroup>
+            <p>
+                
+            </p>
+        </div>
+    </section>
+}
+<div style="text-align:center;">
+    <h3>It'll take @ViewBag.tXP experience to get from level @ViewBag.sLvl to @ViewBag.eLvl</h3>
+    @using (Html.BeginForm("XPCalc", "Home", FormMethod.Post))
+    {
+        <p>
+            Start Level: @Html.TextBox("startLvl")</p>
+        <p>
+            End Level: @Html.TextBox("endLvl")
+        </p>
+        <input type="submit" value="How Much?" />
+    }
+</div>
